@@ -60,16 +60,10 @@
 
 	var _backbone2 = _interopRequireDefault(_backbone);
 
-	var now = new Date();
-	var today = now.toISOString().slice(0, 10);
-
 	_application2['default'].on('start', function () {
 	    _application2['default'].root = new _layout.Root({
-	        collection: new _events.EventsList(),
-	        today: today
+	        collection: new _events.EventsList()
 	    });
-
-	    // const router = new Router();
 	    _backbone2['default'].history.start();
 	});
 
