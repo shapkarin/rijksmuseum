@@ -7,7 +7,6 @@ APP.on('start', function () {
     APP.root = new Root({
         collection: new EventsList()
     });
-    Backbone.history.start();
 });
 
 APP.start();
