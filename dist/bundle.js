@@ -23745,10 +23745,17 @@
 	'use strict';
 
 	Object.defineProperty(exports, '__esModule', {
-	  value: true
+	    value: true
 	});
 	var now = new Date();
-	var today = now.toISOString().slice(0, 10);
+	var today = now.toLocaleDateString('nl').split('-').reverse().map(function (date, i) {
+	    if (i === 0) {
+	        return date;
+	    } else {
+	        return ("0" + date).slice(-2);
+	    }
+	}).join('-');
+
 	exports.today = today;
 	var key = 'lPwqt7oL';
 	exports.key = key;
