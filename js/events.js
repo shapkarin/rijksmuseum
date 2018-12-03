@@ -1,5 +1,4 @@
 import Backbone from 'backbone';
-import LocalStorage from 'backbone.localstorage';
 import $ from 'jquery';
 import { key, today } from './constants';
 
