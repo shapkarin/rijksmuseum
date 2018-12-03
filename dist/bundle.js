@@ -23593,8 +23593,7 @@
 
 	    initialize: function initialize() {
 	        this.showHeader();
-	        this.showShirtsList();
-	        // this.showCart()
+	        this.showEventsList();
 	    },
 
 	    showHeader: function showHeader() {
@@ -23602,21 +23601,13 @@
 	        this.showChildView('header', header);
 	    },
 
-	    showShirtsList: function showShirtsList() {
+	    showEventsList: function showEventsList() {
 	        this.showChildView('main', new _views.ShirtsListView({
 	            collection: this.collection
-	            //cartCollection: this.options.cartCollection
 	        }));
 	    }
-
 	});
 	exports.Root = Root;
-	// showCart: function(){
-	//     const carList = new CatListView({
-	//         collection: this.options.cartCollection
-	//     });
-	//     this.showChildView('cart', carList);
-	// },
 
 /***/ }),
 /* 13 */
