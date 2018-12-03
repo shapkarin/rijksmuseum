@@ -1,29 +1,10 @@
-**Libraries used**
------------------
-
-- [Marionette](http://marionettejs.com/) is the primary library used to structure the application
-- [Backbone.js](http://backbonejs.org/) is a dependency of Marionette
-- [jQuery](http://jquery.com) is soft dependency of Marionette
-- [Underscore](http://underscorejs.org/) is a hard dependency of Marionette
-- [Backbone.Radio](https://github.com/marionettejs/backbone.radio) is a messaging system used with Marionette
-- [Marionette-service](https://github.com/benmccormick/marionette-service) is a shim for the Marionette-Backbone.radio integration that will be present in Marionette 3.0.0
-- [Webpack](https://webpack.github.io/) is a loader for writing modular front end code
-- [Babel](https://babeljs.io/) is a transpiler that allows writing ES6 code that can run in current browsers
-
-** Getting started with this repo **
-------------------------------------
-
-To pull in your updates and run the app locally, run the following from the root of this repository
+## Run
 
 ```
-# install webpack
-npm install -g webpack
-# install local dependencies (you can skip this if not editing the code)
-npm install
-# run webpack (you can skip this if not editing the code) to build code
+npm i
 webpack
-# run a local webserver (does not have to be python)
-python -m SimpleHTTPServer 8000
+#or
+npm run build
+#or
+npx webpack
 ```
-
-The app will then be available at `http://localhost:8000`
