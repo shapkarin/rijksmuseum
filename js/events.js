@@ -6,6 +6,14 @@ import { KEY } from './constants';
 const now = new Date();
 const today = now.toISOString().slice(0,10);
 
+const Calendar = Backbone.Model.extend({
+    defaults: {
+        today
+    },
+});
+
+export const calendar = new Calendar();
+
 const Event = Backbone.Model.extend({
     defaults: {
         imageLoading: true
@@ -31,7 +39,7 @@ const Event = Backbone.Model.extend({
 
 export const EventsList = Backbone.Collection.extend({
     model: Event,
-    url: `https://www.rijksmuseum.nl/api/en/agenda/${today}?key=${KEY}&format=json`,
+    url: `https://www.rijksmuseum.nl/api/en/agenda/${calendar.get('today')}?key=${KEY}&format=json`,
     initialize: function() {
         this.fetch();
     },

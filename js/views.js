@@ -1,6 +1,8 @@
 import Marionette from 'backbone.marionette';
 import Backbone from 'backbone';
 
+import { calendar } from './events';
+
 import headerTpl from './templates/header.tpl';
 import eventTpl from './templates/event.tpl';
 import eventsListTpl from './templates/eventsList.tpl';
@@ -20,5 +22,6 @@ export const EventsListView = Backbone.Marionette.CompositeView.extend({
 });
 
 export const Header = Marionette.ItemView.extend({
+    model: calendar,
     template: headerTpl
 });
