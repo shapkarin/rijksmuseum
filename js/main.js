@@ -1,5 +1,4 @@
 import APP from './application';
-import { Router } from './router';
 import { Root } from './layout'
 import { EventsList } from './events';
 import Backbone from 'backbone';
