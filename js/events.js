@@ -1,10 +1,7 @@
 import Backbone from 'backbone';
 import LocalStorage from 'backbone.localstorage';
 import $ from 'jquery';
-import { KEY } from './constants';
-
-const now = new Date();
-const today = now.toISOString().slice(0,10);
+import { key, today } from './constants';
 
 const Calendar = Backbone.Model.extend({
     defaults: {
@@ -27,7 +24,7 @@ const Event = Backbone.Model.extend({
         );
 
         $.ajax({
-            url: `https://www.rijksmuseum.nl/api/pages/${parsedUrl}?key=${KEY}&format=json`
+            url: `https://www.rijksmuseum.nl/api/pages/${parsedUrl}?key=${key}&format=json`
         }).done((result) => {
             model.set({
                 image: result.contentPage.headerImage,
@@ -39,7 +36,7 @@ const Event = Backbone.Model.extend({
 
 export const EventsList = Backbone.Collection.extend({
     model: Event,
-    url: `https://www.rijksmuseum.nl/api/en/agenda/${calendar.get('today')}?key=${KEY}&format=json`,
+    url: `https://www.rijksmuseum.nl/api/en/agenda/${calendar.get('today')}?key=${key}&format=json`,
     initialize: function() {
         this.fetch();
     },
