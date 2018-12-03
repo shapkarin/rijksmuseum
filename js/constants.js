@@ -7,7 +7,7 @@ export const today = now
         if(i === 0){
             return date
         }else {
-            return ("0" + date).slice(-2)
+            return ('0' + date).slice(-2)
         }
     }).join('-');
 
