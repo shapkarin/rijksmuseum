@@ -1,14 +1,3 @@
-const now = new Date();
-export const today = now
-    .toLocaleDateString('nl')
-    .split('-')
-    .reverse()
-    .map(function(date, i){
-        if(i === 0){
-            return date
-        }else {
-            return ("0" + date).slice(-2)
-        }
-    }).join('-');
-
+import moment from 'moment';
+export const today = moment().format('YYYY-MM-DD')
 export const key = 'lPwqt7oL';
