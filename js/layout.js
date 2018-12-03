@@ -1,5 +1,5 @@
 import Marionette from 'backbone.marionette';
-import {Header, ShirtsListView } from './views';
+import { Header, EventsListView } from './views';
 
 export const Root = Marionette.LayoutView.extend({
 
@@ -21,7 +21,7 @@ export const Root = Marionette.LayoutView.extend({
     },
 
     showEventsList: function () {
-        this.showChildView('main', new ShirtsListView({
+        this.showChildView('main', new EventsListView({
             collection: this.collection
         }));
     }

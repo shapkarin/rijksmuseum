@@ -5,7 +5,7 @@ import headerTpl from './templates/header.tpl';
 import eventTpl from './templates/event.tpl';
 import eventsListTpl from './templates/eventsList.tpl';
 
-export const ShirtView = Marionette.ItemView.extend({
+export const EventView = Marionette.ItemView.extend({
     tagName: 'li',
     template: eventTpl,
     modelEvents: {
@@ -13,9 +13,9 @@ export const ShirtView = Marionette.ItemView.extend({
     },
 });
 
-export const ShirtsListView = Backbone.Marionette.CompositeView.extend({
+export const EventsListView = Backbone.Marionette.CompositeView.extend({
     template: eventsListTpl,
-    childView: ShirtView,
+    childView: EventView,
     childViewContainer: '#events-list',
 });
 
