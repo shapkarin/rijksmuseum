@@ -1,10 +1,17 @@
 import Backbone from 'backbone';
 import $ from 'jquery';
+import moment from 'moment';
+
 import { key, today } from './constants';
+
+const nextDays = Array.apply(null, {length: 30}).map(function(item, index){
+    return moment(today).add(index, 'days').format('YYYY-MM-DD')
+});
 
 const Calendar = Backbone.Model.extend({
     defaults: {
-        today
+        today,
+        choose: nextDays
     },
 });
 
@@ -35,7 +42,9 @@ const Event = Backbone.Model.extend({
 
 export const EventsList = Backbone.Collection.extend({
     model: Event,
-    url: `https://www.rijksmuseum.nl/api/en/agenda/${calendar.get('today')}?key=${key}&format=json`,
+    url: function(){
+        return `https://www.rijksmuseum.nl/api/en/agenda/${calendar.get('today')}?key=${key}&format=json`;
+    },
     initialize: function() {
         this.fetch();
     },

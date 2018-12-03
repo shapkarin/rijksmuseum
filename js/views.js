@@ -20,9 +20,30 @@ export const EventsListView = Backbone.Marionette.CompositeView.extend({
     collection: new EventsList(),
     childView: EventView,
     childViewContainer: '#events-list',
+    initialize: function(){
+        this.listenTo(calendar, 'change', () => {
+            this.collection.fetch();
+        });
+    }
 });
 
 export const Header = Marionette.ItemView.extend({
     model: calendar,
-    template: headerTpl
+    template: headerTpl,
+    modelEvents: {
+        change: 'render'
+    },
+    ui: {
+        select: '#newDate'
+    },
+
+    events: {
+        'change @ui.select': 'search'
+    },
+
+    search: function(){
+        this.model.set(
+            'today', this.ui.select.val()
+        )
+    }
 });
