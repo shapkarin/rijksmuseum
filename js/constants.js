@@ -1,4 +1,6 @@
 const now = new Date();
+
+// maybe write something else..
 export const today = now
     .toLocaleDateString('nl')
     .split('-')
