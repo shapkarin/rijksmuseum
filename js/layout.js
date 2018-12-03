@@ -12,15 +12,8 @@ export const Root = Marionette.LayoutView.extend({
     },
 
     initialize: function() {
-        this.showHeader();
-        this.showEventsList();
-    },
-
-    showHeader: function () {
         this.showChildView('header', new Header());
-    },
-
-    showEventsList: function () {
         this.showChildView('main', new EventsListView());
     }
+
 });
