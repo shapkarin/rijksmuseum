@@ -23635,13 +23635,34 @@
 	    template: _templatesEventsListTpl2['default'],
 	    collection: new _events.EventsList(),
 	    childView: EventView,
-	    childViewContainer: '#events-list'
+	    childViewContainer: '#events-list',
+	    initialize: function initialize() {
+	        var _this = this;
+
+	        this.listenTo(_events.calendar, 'change', function () {
+	            _this.collection.fetch();
+	        });
+	    }
 	});
 
 	exports.EventsListView = EventsListView;
 	var Header = _backboneMarionette2['default'].ItemView.extend({
 	    model: _events.calendar,
-	    template: _templatesHeaderTpl2['default']
+	    template: _templatesHeaderTpl2['default'],
+	    modelEvents: {
+	        change: 'render'
+	    },
+	    ui: {
+	        select: '#newDate'
+	    },
+
+	    events: {
+	        'change @ui.select': 'search'
+	    },
+
+	    search: function search() {
+	        this.model.set('today', this.ui.select.val());
+	    }
 	});
 	exports.Header = Header;
 
@@ -23665,11 +23686,20 @@
 
 	var _jquery2 = _interopRequireDefault(_jquery);
 
-	var _constants = __webpack_require__(15);
+	var _moment = __webpack_require__(15);
+
+	var _moment2 = _interopRequireDefault(_moment);
+
+	var _constants = __webpack_require__(140);
+
+	var nextDays = Array.apply(null, { length: 30 }).map(function (item, index) {
+	    return (0, _moment2['default'])(_constants.today).add(index, 'days').format('YYYY-MM-DD');
+	});
 
 	var Calendar = _backbone2['default'].Model.extend({
 	    defaults: {
-	        today: _constants.today
+	        today: _constants.today,
+	        choose: nextDays
 	    }
 	});
 
@@ -23704,7 +23734,9 @@
 
 	var EventsList = _backbone2['default'].Collection.extend({
 	    model: Event,
-	    url: 'https://www.rijksmuseum.nl/api/en/agenda/' + calendar.get('today') + '?key=' + _constants.key + '&format=json',
+	    url: function url() {
+	        return 'https://www.rijksmuseum.nl/api/en/agenda/' + calendar.get('today') + '?key=' + _constants.key + '&format=json';
+	    },
 	    initialize: function initialize() {
 	        this.fetch();
 	    },
@@ -23716,27 +23748,6 @@
 
 /***/ }),
 /* 15 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-	var _moment = __webpack_require__(16);
-
-	var _moment2 = _interopRequireDefault(_moment);
-
-	var today = (0, _moment2['default'])().format('YYYY-MM-DD');
-	exports.today = today;
-	var key = 'lPwqt7oL';
-	exports.key = key;
-
-/***/ }),
-/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var require;/* WEBPACK VAR INJECTION */(function(module) {//! moment.js
@@ -25574,7 +25585,7 @@
 	            try {
 	                oldLocale = globalLocale._abbr;
 	                var aliasedRequire = require;
-	                __webpack_require__(17)("./" + name);
+	                __webpack_require__(16)("./" + name);
 	                getSetGlobalLocale(oldLocale);
 	            } catch (e) {}
 	        }
@@ -28249,256 +28260,256 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)(module)))
 
 /***/ }),
-/* 17 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var map = {
-		"./af": 18,
-		"./af.js": 18,
-		"./ar": 19,
-		"./ar-dz": 20,
-		"./ar-dz.js": 20,
-		"./ar-kw": 21,
-		"./ar-kw.js": 21,
-		"./ar-ly": 22,
-		"./ar-ly.js": 22,
-		"./ar-ma": 23,
-		"./ar-ma.js": 23,
-		"./ar-sa": 24,
-		"./ar-sa.js": 24,
-		"./ar-tn": 25,
-		"./ar-tn.js": 25,
-		"./ar.js": 19,
-		"./az": 26,
-		"./az.js": 26,
-		"./be": 27,
-		"./be.js": 27,
-		"./bg": 28,
-		"./bg.js": 28,
-		"./bm": 29,
-		"./bm.js": 29,
-		"./bn": 30,
-		"./bn.js": 30,
-		"./bo": 31,
-		"./bo.js": 31,
-		"./br": 32,
-		"./br.js": 32,
-		"./bs": 33,
-		"./bs.js": 33,
-		"./ca": 34,
-		"./ca.js": 34,
-		"./cs": 35,
-		"./cs.js": 35,
-		"./cv": 36,
-		"./cv.js": 36,
-		"./cy": 37,
-		"./cy.js": 37,
-		"./da": 38,
-		"./da.js": 38,
-		"./de": 39,
-		"./de-at": 40,
-		"./de-at.js": 40,
-		"./de-ch": 41,
-		"./de-ch.js": 41,
-		"./de.js": 39,
-		"./dv": 42,
-		"./dv.js": 42,
-		"./el": 43,
-		"./el.js": 43,
-		"./en-au": 44,
-		"./en-au.js": 44,
-		"./en-ca": 45,
-		"./en-ca.js": 45,
-		"./en-gb": 46,
-		"./en-gb.js": 46,
-		"./en-ie": 47,
-		"./en-ie.js": 47,
-		"./en-il": 48,
-		"./en-il.js": 48,
-		"./en-nz": 49,
-		"./en-nz.js": 49,
-		"./eo": 50,
-		"./eo.js": 50,
-		"./es": 51,
-		"./es-do": 52,
-		"./es-do.js": 52,
-		"./es-us": 53,
-		"./es-us.js": 53,
-		"./es.js": 51,
-		"./et": 54,
-		"./et.js": 54,
-		"./eu": 55,
-		"./eu.js": 55,
-		"./fa": 56,
-		"./fa.js": 56,
-		"./fi": 57,
-		"./fi.js": 57,
-		"./fo": 58,
-		"./fo.js": 58,
-		"./fr": 59,
-		"./fr-ca": 60,
-		"./fr-ca.js": 60,
-		"./fr-ch": 61,
-		"./fr-ch.js": 61,
-		"./fr.js": 59,
-		"./fy": 62,
-		"./fy.js": 62,
-		"./gd": 63,
-		"./gd.js": 63,
-		"./gl": 64,
-		"./gl.js": 64,
-		"./gom-latn": 65,
-		"./gom-latn.js": 65,
-		"./gu": 66,
-		"./gu.js": 66,
-		"./he": 67,
-		"./he.js": 67,
-		"./hi": 68,
-		"./hi.js": 68,
-		"./hr": 69,
-		"./hr.js": 69,
-		"./hu": 70,
-		"./hu.js": 70,
-		"./hy-am": 71,
-		"./hy-am.js": 71,
-		"./id": 72,
-		"./id.js": 72,
-		"./is": 73,
-		"./is.js": 73,
-		"./it": 74,
-		"./it.js": 74,
-		"./ja": 75,
-		"./ja.js": 75,
-		"./jv": 76,
-		"./jv.js": 76,
-		"./ka": 77,
-		"./ka.js": 77,
-		"./kk": 78,
-		"./kk.js": 78,
-		"./km": 79,
-		"./km.js": 79,
-		"./kn": 80,
-		"./kn.js": 80,
-		"./ko": 81,
-		"./ko.js": 81,
-		"./ky": 82,
-		"./ky.js": 82,
-		"./lb": 83,
-		"./lb.js": 83,
-		"./lo": 84,
-		"./lo.js": 84,
-		"./lt": 85,
-		"./lt.js": 85,
-		"./lv": 86,
-		"./lv.js": 86,
-		"./me": 87,
-		"./me.js": 87,
-		"./mi": 88,
-		"./mi.js": 88,
-		"./mk": 89,
-		"./mk.js": 89,
-		"./ml": 90,
-		"./ml.js": 90,
-		"./mn": 91,
-		"./mn.js": 91,
-		"./mr": 92,
-		"./mr.js": 92,
-		"./ms": 93,
-		"./ms-my": 94,
-		"./ms-my.js": 94,
-		"./ms.js": 93,
-		"./mt": 95,
-		"./mt.js": 95,
-		"./my": 96,
-		"./my.js": 96,
-		"./nb": 97,
-		"./nb.js": 97,
-		"./ne": 98,
-		"./ne.js": 98,
-		"./nl": 99,
-		"./nl-be": 100,
-		"./nl-be.js": 100,
-		"./nl.js": 99,
-		"./nn": 101,
-		"./nn.js": 101,
-		"./pa-in": 102,
-		"./pa-in.js": 102,
-		"./pl": 103,
-		"./pl.js": 103,
-		"./pt": 104,
-		"./pt-br": 105,
-		"./pt-br.js": 105,
-		"./pt.js": 104,
-		"./ro": 106,
-		"./ro.js": 106,
-		"./ru": 107,
-		"./ru.js": 107,
-		"./sd": 108,
-		"./sd.js": 108,
-		"./se": 109,
-		"./se.js": 109,
-		"./si": 110,
-		"./si.js": 110,
-		"./sk": 111,
-		"./sk.js": 111,
-		"./sl": 112,
-		"./sl.js": 112,
-		"./sq": 113,
-		"./sq.js": 113,
-		"./sr": 114,
-		"./sr-cyrl": 115,
-		"./sr-cyrl.js": 115,
-		"./sr.js": 114,
-		"./ss": 116,
-		"./ss.js": 116,
-		"./sv": 117,
-		"./sv.js": 117,
-		"./sw": 118,
-		"./sw.js": 118,
-		"./ta": 119,
-		"./ta.js": 119,
-		"./te": 120,
-		"./te.js": 120,
-		"./tet": 121,
-		"./tet.js": 121,
-		"./tg": 122,
-		"./tg.js": 122,
-		"./th": 123,
-		"./th.js": 123,
-		"./tl-ph": 124,
-		"./tl-ph.js": 124,
-		"./tlh": 125,
-		"./tlh.js": 125,
-		"./tr": 126,
-		"./tr.js": 126,
-		"./tzl": 127,
-		"./tzl.js": 127,
-		"./tzm": 128,
-		"./tzm-latn": 129,
-		"./tzm-latn.js": 129,
-		"./tzm.js": 128,
-		"./ug-cn": 130,
-		"./ug-cn.js": 130,
-		"./uk": 131,
-		"./uk.js": 131,
-		"./ur": 132,
-		"./ur.js": 132,
-		"./uz": 133,
-		"./uz-latn": 134,
-		"./uz-latn.js": 134,
-		"./uz.js": 133,
-		"./vi": 135,
-		"./vi.js": 135,
-		"./x-pseudo": 136,
-		"./x-pseudo.js": 136,
-		"./yo": 137,
-		"./yo.js": 137,
-		"./zh-cn": 138,
-		"./zh-cn.js": 138,
-		"./zh-hk": 139,
-		"./zh-hk.js": 139,
-		"./zh-tw": 140,
-		"./zh-tw.js": 140
+		"./af": 17,
+		"./af.js": 17,
+		"./ar": 18,
+		"./ar-dz": 19,
+		"./ar-dz.js": 19,
+		"./ar-kw": 20,
+		"./ar-kw.js": 20,
+		"./ar-ly": 21,
+		"./ar-ly.js": 21,
+		"./ar-ma": 22,
+		"./ar-ma.js": 22,
+		"./ar-sa": 23,
+		"./ar-sa.js": 23,
+		"./ar-tn": 24,
+		"./ar-tn.js": 24,
+		"./ar.js": 18,
+		"./az": 25,
+		"./az.js": 25,
+		"./be": 26,
+		"./be.js": 26,
+		"./bg": 27,
+		"./bg.js": 27,
+		"./bm": 28,
+		"./bm.js": 28,
+		"./bn": 29,
+		"./bn.js": 29,
+		"./bo": 30,
+		"./bo.js": 30,
+		"./br": 31,
+		"./br.js": 31,
+		"./bs": 32,
+		"./bs.js": 32,
+		"./ca": 33,
+		"./ca.js": 33,
+		"./cs": 34,
+		"./cs.js": 34,
+		"./cv": 35,
+		"./cv.js": 35,
+		"./cy": 36,
+		"./cy.js": 36,
+		"./da": 37,
+		"./da.js": 37,
+		"./de": 38,
+		"./de-at": 39,
+		"./de-at.js": 39,
+		"./de-ch": 40,
+		"./de-ch.js": 40,
+		"./de.js": 38,
+		"./dv": 41,
+		"./dv.js": 41,
+		"./el": 42,
+		"./el.js": 42,
+		"./en-au": 43,
+		"./en-au.js": 43,
+		"./en-ca": 44,
+		"./en-ca.js": 44,
+		"./en-gb": 45,
+		"./en-gb.js": 45,
+		"./en-ie": 46,
+		"./en-ie.js": 46,
+		"./en-il": 47,
+		"./en-il.js": 47,
+		"./en-nz": 48,
+		"./en-nz.js": 48,
+		"./eo": 49,
+		"./eo.js": 49,
+		"./es": 50,
+		"./es-do": 51,
+		"./es-do.js": 51,
+		"./es-us": 52,
+		"./es-us.js": 52,
+		"./es.js": 50,
+		"./et": 53,
+		"./et.js": 53,
+		"./eu": 54,
+		"./eu.js": 54,
+		"./fa": 55,
+		"./fa.js": 55,
+		"./fi": 56,
+		"./fi.js": 56,
+		"./fo": 57,
+		"./fo.js": 57,
+		"./fr": 58,
+		"./fr-ca": 59,
+		"./fr-ca.js": 59,
+		"./fr-ch": 60,
+		"./fr-ch.js": 60,
+		"./fr.js": 58,
+		"./fy": 61,
+		"./fy.js": 61,
+		"./gd": 62,
+		"./gd.js": 62,
+		"./gl": 63,
+		"./gl.js": 63,
+		"./gom-latn": 64,
+		"./gom-latn.js": 64,
+		"./gu": 65,
+		"./gu.js": 65,
+		"./he": 66,
+		"./he.js": 66,
+		"./hi": 67,
+		"./hi.js": 67,
+		"./hr": 68,
+		"./hr.js": 68,
+		"./hu": 69,
+		"./hu.js": 69,
+		"./hy-am": 70,
+		"./hy-am.js": 70,
+		"./id": 71,
+		"./id.js": 71,
+		"./is": 72,
+		"./is.js": 72,
+		"./it": 73,
+		"./it.js": 73,
+		"./ja": 74,
+		"./ja.js": 74,
+		"./jv": 75,
+		"./jv.js": 75,
+		"./ka": 76,
+		"./ka.js": 76,
+		"./kk": 77,
+		"./kk.js": 77,
+		"./km": 78,
+		"./km.js": 78,
+		"./kn": 79,
+		"./kn.js": 79,
+		"./ko": 80,
+		"./ko.js": 80,
+		"./ky": 81,
+		"./ky.js": 81,
+		"./lb": 82,
+		"./lb.js": 82,
+		"./lo": 83,
+		"./lo.js": 83,
+		"./lt": 84,
+		"./lt.js": 84,
+		"./lv": 85,
+		"./lv.js": 85,
+		"./me": 86,
+		"./me.js": 86,
+		"./mi": 87,
+		"./mi.js": 87,
+		"./mk": 88,
+		"./mk.js": 88,
+		"./ml": 89,
+		"./ml.js": 89,
+		"./mn": 90,
+		"./mn.js": 90,
+		"./mr": 91,
+		"./mr.js": 91,
+		"./ms": 92,
+		"./ms-my": 93,
+		"./ms-my.js": 93,
+		"./ms.js": 92,
+		"./mt": 94,
+		"./mt.js": 94,
+		"./my": 95,
+		"./my.js": 95,
+		"./nb": 96,
+		"./nb.js": 96,
+		"./ne": 97,
+		"./ne.js": 97,
+		"./nl": 98,
+		"./nl-be": 99,
+		"./nl-be.js": 99,
+		"./nl.js": 98,
+		"./nn": 100,
+		"./nn.js": 100,
+		"./pa-in": 101,
+		"./pa-in.js": 101,
+		"./pl": 102,
+		"./pl.js": 102,
+		"./pt": 103,
+		"./pt-br": 104,
+		"./pt-br.js": 104,
+		"./pt.js": 103,
+		"./ro": 105,
+		"./ro.js": 105,
+		"./ru": 106,
+		"./ru.js": 106,
+		"./sd": 107,
+		"./sd.js": 107,
+		"./se": 108,
+		"./se.js": 108,
+		"./si": 109,
+		"./si.js": 109,
+		"./sk": 110,
+		"./sk.js": 110,
+		"./sl": 111,
+		"./sl.js": 111,
+		"./sq": 112,
+		"./sq.js": 112,
+		"./sr": 113,
+		"./sr-cyrl": 114,
+		"./sr-cyrl.js": 114,
+		"./sr.js": 113,
+		"./ss": 115,
+		"./ss.js": 115,
+		"./sv": 116,
+		"./sv.js": 116,
+		"./sw": 117,
+		"./sw.js": 117,
+		"./ta": 118,
+		"./ta.js": 118,
+		"./te": 119,
+		"./te.js": 119,
+		"./tet": 120,
+		"./tet.js": 120,
+		"./tg": 121,
+		"./tg.js": 121,
+		"./th": 122,
+		"./th.js": 122,
+		"./tl-ph": 123,
+		"./tl-ph.js": 123,
+		"./tlh": 124,
+		"./tlh.js": 124,
+		"./tr": 125,
+		"./tr.js": 125,
+		"./tzl": 126,
+		"./tzl.js": 126,
+		"./tzm": 127,
+		"./tzm-latn": 128,
+		"./tzm-latn.js": 128,
+		"./tzm.js": 127,
+		"./ug-cn": 129,
+		"./ug-cn.js": 129,
+		"./uk": 130,
+		"./uk.js": 130,
+		"./ur": 131,
+		"./ur.js": 131,
+		"./uz": 132,
+		"./uz-latn": 133,
+		"./uz-latn.js": 133,
+		"./uz.js": 132,
+		"./vi": 134,
+		"./vi.js": 134,
+		"./x-pseudo": 135,
+		"./x-pseudo.js": 135,
+		"./yo": 136,
+		"./yo.js": 136,
+		"./zh-cn": 137,
+		"./zh-cn.js": 137,
+		"./zh-hk": 138,
+		"./zh-hk.js": 138,
+		"./zh-tw": 139,
+		"./zh-tw.js": 139
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -28511,17 +28522,17 @@
 	};
 	webpackContext.resolve = webpackContextResolve;
 	module.exports = webpackContext;
-	webpackContext.id = 17;
+	webpackContext.id = 16;
 
 
 /***/ }),
-/* 18 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -28592,13 +28603,13 @@
 
 
 /***/ }),
-/* 19 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -28731,13 +28742,13 @@
 
 
 /***/ }),
-/* 20 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -28794,13 +28805,13 @@
 
 
 /***/ }),
-/* 21 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -28857,13 +28868,13 @@
 
 
 /***/ }),
-/* 22 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -28983,13 +28994,13 @@
 
 
 /***/ }),
-/* 23 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -29046,13 +29057,13 @@
 
 
 /***/ }),
-/* 24 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -29154,13 +29165,13 @@
 
 
 /***/ }),
-/* 25 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -29217,13 +29228,13 @@
 
 
 /***/ }),
-/* 26 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -29326,13 +29337,13 @@
 
 
 /***/ }),
-/* 27 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -29462,13 +29473,13 @@
 
 
 /***/ }),
-/* 28 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -29556,13 +29567,13 @@
 
 
 /***/ }),
-/* 29 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -29618,13 +29629,13 @@
 
 
 /***/ }),
-/* 30 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -29741,13 +29752,13 @@
 
 
 /***/ }),
-/* 31 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -29864,13 +29875,13 @@
 
 
 /***/ }),
-/* 32 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -29976,13 +29987,13 @@
 
 
 /***/ }),
-/* 33 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -30131,13 +30142,13 @@
 
 
 /***/ }),
-/* 34 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -30223,13 +30234,13 @@
 
 
 /***/ }),
-/* 35 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -30406,13 +30417,13 @@
 
 
 /***/ }),
-/* 36 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -30473,13 +30484,13 @@
 
 
 /***/ }),
-/* 37 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -30557,13 +30568,13 @@
 
 
 /***/ }),
-/* 38 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -30621,13 +30632,13 @@
 
 
 /***/ }),
-/* 39 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -30701,13 +30712,13 @@
 
 
 /***/ }),
-/* 40 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -30781,13 +30792,13 @@
 
 
 /***/ }),
-/* 41 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -30861,13 +30872,13 @@
 
 
 /***/ }),
-/* 42 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -30964,13 +30975,13 @@
 
 
 /***/ }),
-/* 43 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -31068,13 +31079,13 @@
 
 
 /***/ }),
-/* 44 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -31139,13 +31150,13 @@
 
 
 /***/ }),
-/* 45 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -31206,13 +31217,13 @@
 
 
 /***/ }),
-/* 46 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -31277,13 +31288,13 @@
 
 
 /***/ }),
-/* 47 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -31348,13 +31359,13 @@
 
 
 /***/ }),
-/* 48 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -31414,13 +31425,13 @@
 
 
 /***/ }),
-/* 49 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -31485,13 +31496,13 @@
 
 
 /***/ }),
-/* 50 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -31560,13 +31571,13 @@
 
 
 /***/ }),
-/* 51 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -31656,13 +31667,13 @@
 
 
 /***/ }),
-/* 52 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -31752,13 +31763,13 @@
 
 
 /***/ }),
-/* 53 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -31839,13 +31850,13 @@
 
 
 /***/ }),
-/* 54 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -31923,13 +31934,13 @@
 
 
 /***/ }),
-/* 55 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -31993,13 +32004,13 @@
 
 
 /***/ }),
-/* 56 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -32103,13 +32114,13 @@
 
 
 /***/ }),
-/* 57 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -32216,13 +32227,13 @@
 
 
 /***/ }),
-/* 58 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -32280,13 +32291,13 @@
 
 
 /***/ }),
-/* 59 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -32367,13 +32378,13 @@
 
 
 /***/ }),
-/* 60 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -32445,13 +32456,13 @@
 
 
 /***/ }),
-/* 61 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -32527,13 +32538,13 @@
 
 
 /***/ }),
-/* 62 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -32606,13 +32617,13 @@
 
 
 /***/ }),
-/* 63 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -32686,13 +32697,13 @@
 
 
 /***/ }),
-/* 64 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -32767,13 +32778,13 @@
 
 
 /***/ }),
-/* 65 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -32894,13 +32905,13 @@
 
 
 /***/ }),
-/* 66 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -33022,13 +33033,13 @@
 
 
 /***/ }),
-/* 67 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -33123,13 +33134,13 @@
 
 
 /***/ }),
-/* 68 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -33251,13 +33262,13 @@
 
 
 /***/ }),
-/* 69 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -33409,13 +33420,13 @@
 
 
 /***/ }),
-/* 70 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -33523,13 +33534,13 @@
 
 
 /***/ }),
-/* 71 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -33622,13 +33633,13 @@
 
 
 /***/ }),
-/* 72 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -33708,13 +33719,13 @@
 
 
 /***/ }),
-/* 73 */
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -33844,13 +33855,13 @@
 
 
 /***/ }),
-/* 74 */
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -33917,13 +33928,13 @@
 
 
 /***/ }),
-/* 75 */
+/* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -34013,13 +34024,13 @@
 
 
 /***/ }),
-/* 76 */
+/* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -34099,13 +34110,13 @@
 
 
 /***/ }),
-/* 77 */
+/* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -34192,13 +34203,13 @@
 
 
 /***/ }),
-/* 78 */
+/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -34283,13 +34294,13 @@
 
 
 /***/ }),
-/* 79 */
+/* 78 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -34397,13 +34408,13 @@
 
 
 /***/ }),
-/* 80 */
+/* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -34527,13 +34538,13 @@
 
 
 /***/ }),
-/* 81 */
+/* 80 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -34612,13 +34623,13 @@
 
 
 /***/ }),
-/* 82 */
+/* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -34703,13 +34714,13 @@
 
 
 /***/ }),
-/* 83 */
+/* 82 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -34843,13 +34854,13 @@
 
 
 /***/ }),
-/* 84 */
+/* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -34917,13 +34928,13 @@
 
 
 /***/ }),
-/* 85 */
+/* 84 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -35039,13 +35050,13 @@
 
 
 /***/ }),
-/* 86 */
+/* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -35140,13 +35151,13 @@
 
 
 /***/ }),
-/* 87 */
+/* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -35256,13 +35267,13 @@
 
 
 /***/ }),
-/* 88 */
+/* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -35324,13 +35335,13 @@
 
 
 /***/ }),
-/* 89 */
+/* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -35418,13 +35429,13 @@
 
 
 /***/ }),
-/* 90 */
+/* 89 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -35503,13 +35514,13 @@
 
 
 /***/ }),
-/* 91 */
+/* 90 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -35611,13 +35622,13 @@
 
 
 /***/ }),
-/* 92 */
+/* 91 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -35775,13 +35786,13 @@
 
 
 /***/ }),
-/* 93 */
+/* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -35861,13 +35872,13 @@
 
 
 /***/ }),
-/* 94 */
+/* 93 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -35947,13 +35958,13 @@
 
 
 /***/ }),
-/* 95 */
+/* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -36011,13 +36022,13 @@
 
 
 /***/ }),
-/* 96 */
+/* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -36108,13 +36119,13 @@
 
 
 /***/ }),
-/* 97 */
+/* 96 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -36174,13 +36185,13 @@
 
 
 /***/ }),
-/* 98 */
+/* 97 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -36301,13 +36312,13 @@
 
 
 /***/ }),
-/* 99 */
+/* 98 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -36392,13 +36403,13 @@
 
 
 /***/ }),
-/* 100 */
+/* 99 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -36483,13 +36494,13 @@
 
 
 /***/ }),
-/* 101 */
+/* 100 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -36547,13 +36558,13 @@
 
 
 /***/ }),
-/* 102 */
+/* 101 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -36675,13 +36686,13 @@
 
 
 /***/ }),
-/* 103 */
+/* 102 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -36805,13 +36816,13 @@
 
 
 /***/ }),
-/* 104 */
+/* 103 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -36874,13 +36885,13 @@
 
 
 /***/ }),
-/* 105 */
+/* 104 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -36939,13 +36950,13 @@
 
 
 /***/ }),
-/* 106 */
+/* 105 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -37018,13 +37029,13 @@
 
 
 /***/ }),
-/* 107 */
+/* 106 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -37204,13 +37215,13 @@
 
 
 /***/ }),
-/* 108 */
+/* 107 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -37306,13 +37317,13 @@
 
 
 /***/ }),
-/* 109 */
+/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -37370,13 +37381,13 @@
 
 
 /***/ }),
-/* 110 */
+/* 109 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -37445,13 +37456,13 @@
 
 
 /***/ }),
-/* 111 */
+/* 110 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -37605,13 +37616,13 @@
 
 
 /***/ }),
-/* 112 */
+/* 111 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -37782,13 +37793,13 @@
 
 
 /***/ }),
-/* 113 */
+/* 112 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -37854,13 +37865,13 @@
 
 
 /***/ }),
-/* 114 */
+/* 113 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -37969,13 +37980,13 @@
 
 
 /***/ }),
-/* 115 */
+/* 114 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -38084,13 +38095,13 @@
 
 
 /***/ }),
-/* 116 */
+/* 115 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -38176,13 +38187,13 @@
 
 
 /***/ }),
-/* 117 */
+/* 116 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -38249,13 +38260,13 @@
 
 
 /***/ }),
-/* 118 */
+/* 117 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -38312,13 +38323,13 @@
 
 
 /***/ }),
-/* 119 */
+/* 118 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -38445,13 +38456,13 @@
 
 
 /***/ }),
-/* 120 */
+/* 119 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -38538,13 +38549,13 @@
 
 
 /***/ }),
-/* 121 */
+/* 120 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -38609,13 +38620,13 @@
 
 
 /***/ }),
-/* 122 */
+/* 121 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -38729,13 +38740,13 @@
 
 
 /***/ }),
-/* 123 */
+/* 122 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -38800,13 +38811,13 @@
 
 
 /***/ }),
-/* 124 */
+/* 123 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -38866,13 +38877,13 @@
 
 
 /***/ }),
-/* 125 */
+/* 124 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -38992,12 +39003,12 @@
 
 
 /***/ }),
-/* 126 */
+/* 125 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -39090,13 +39101,13 @@
 
 
 /***/ }),
-/* 127 */
+/* 126 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -39185,13 +39196,13 @@
 
 
 /***/ }),
-/* 128 */
+/* 127 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -39247,13 +39258,13 @@
 
 
 /***/ }),
-/* 129 */
+/* 128 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -39309,13 +39320,13 @@
 
 
 /***/ }),
-/* 130 */
+/* 129 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js language configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -39432,13 +39443,13 @@
 
 
 /***/ }),
-/* 131 */
+/* 130 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -39587,13 +39598,13 @@
 
 
 /***/ }),
-/* 132 */
+/* 131 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -39689,13 +39700,13 @@
 
 
 /***/ }),
-/* 133 */
+/* 132 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -39751,13 +39762,13 @@
 
 
 /***/ }),
-/* 134 */
+/* 133 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -39813,13 +39824,13 @@
 
 
 /***/ }),
-/* 135 */
+/* 134 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -39896,13 +39907,13 @@
 
 
 /***/ }),
-/* 136 */
+/* 135 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -39968,13 +39979,13 @@
 
 
 /***/ }),
-/* 137 */
+/* 136 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -40032,13 +40043,13 @@
 
 
 /***/ }),
-/* 138 */
+/* 137 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -40146,13 +40157,13 @@
 
 
 /***/ }),
-/* 139 */
+/* 138 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -40253,13 +40264,13 @@
 
 
 /***/ }),
-/* 140 */
+/* 139 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(16)) :
+	    true ? factory(__webpack_require__(15)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -40360,16 +40371,46 @@
 
 
 /***/ }),
+/* 140 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _moment = __webpack_require__(15);
+
+	var _moment2 = _interopRequireDefault(_moment);
+
+	var today = (0, _moment2['default'])().format('YYYY-MM-DD');
+	exports.today = today;
+	var key = 'lPwqt7oL';
+	exports.key = key;
+
+/***/ }),
 /* 141 */
 /***/ (function(module, exports) {
 
 	module.exports = function(obj) {
 	obj || (obj = {});
-	var __t, __p = '';
+	var __t, __p = '', __j = Array.prototype.join;
+	function print() { __p += __j.call(arguments, '') }
 	with (obj) {
 	__p += '<h2>Today Events</h1>\n<div>Date: ' +
 	((__t = ( today )) == null ? '' : __t) +
-	'</div>';
+	'</div>\n<br>\n<h3>Change date:</h3>\n<select id="newDate">\n    ';
+	 for(var i = 0; i < choose.length; i++){;
+	__p += '\n        <option value="' +
+	((__t = ( choose[i] )) == null ? '' : __t) +
+	'">' +
+	((__t = ( choose[i] )) == null ? '' : __t) +
+	'</option>\n    ';
+	};
+	__p += '\n</select>';
 
 	}
 	return __p
