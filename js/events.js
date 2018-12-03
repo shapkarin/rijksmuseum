@@ -2,8 +2,6 @@ import Backbone from 'backbone';
 import LocalStorage from 'backbone.localstorage';
 import $ from 'jquery';
 
-Backbone.LocalStorage = LocalStorage;
-
 const now = new Date();
 const today = now.toISOString().slice(0,10);
 const KEY = 'lPwqt7oL';
