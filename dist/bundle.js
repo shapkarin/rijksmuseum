@@ -54,17 +54,12 @@
 
 	var _layout = __webpack_require__(12);
 
-	var _events = __webpack_require__(14);
-
 	var _backbone = __webpack_require__(3);
 
 	var _backbone2 = _interopRequireDefault(_backbone);
 
 	_application2['default'].on('start', function () {
-	    _application2['default'].root = new _layout.Root({
-	        collection: new _events.EventsList()
-	    });
-	    _backbone2['default'].history.start();
+	    _application2['default'].root = new _layout.Root();
 	});
 
 	_application2['default'].start();
@@ -23580,6 +23575,8 @@
 
 	var _views = __webpack_require__(13);
 
+	var _events = __webpack_require__(14);
+
 	var Root = _backboneMarionette2['default'].LayoutView.extend({
 
 	    el: '#app',
@@ -23601,7 +23598,7 @@
 
 	    showEventsList: function showEventsList() {
 	        this.showChildView('main', new _views.EventsListView({
-	            collection: this.collection
+	            collection: new _events.EventsList()
 	        }));
 	    }
 	});
