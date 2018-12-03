@@ -1,3 +1,14 @@
 const now = new Date();
-export const today = now.toISOString().slice(0,10);
+export const today = now
+    .toLocaleDateString('nl')
+    .split('-')
+    .reverse()
+    .map(function(date, i){
+        if(i === 0){
+            return date
+        }else {
+            return ("0" + date).slice(-2)
+        }
+    }).join('-');
+
 export const key = 'lPwqt7oL';
