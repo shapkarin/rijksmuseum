@@ -40443,7 +40443,7 @@
 	with (obj) {
 	__p += '<a href="' +
 	((__t = ( pageRef.url )) == null ? '' : __t) +
-	'" class="Event">\n    ';
+	'" target="_blank" class="Event">\n    ';
 	 if(imageLoading){;
 	__p += '\n        <div>Fetching image...</div>\n    ';
 	}else{;
