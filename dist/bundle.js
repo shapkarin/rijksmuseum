@@ -23608,6 +23608,10 @@
 
 	var _backbone2 = _interopRequireDefault(_backbone);
 
+	var _jquery = __webpack_require__(6);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
 	var _events = __webpack_require__(14);
 
 	var _templatesHeaderTpl = __webpack_require__(141);
@@ -23657,11 +23661,16 @@
 	    },
 
 	    events: {
-	        'change @ui.select': 'search'
+	        'change @ui.select': 'search',
+	        'click .changeLang': 'changeLang'
 	    },
 
 	    search: function search() {
 	        this.model.set('today', this.ui.select.val());
+	    },
+
+	    changeLang: function changeLang(e) {
+	        this.model.set('lang', (0, _jquery2['default'])(e.target).data('lang'));
 	    }
 	});
 	exports.Header = Header;
@@ -23699,7 +23708,8 @@
 	var Calendar = _backbone2['default'].Model.extend({
 	    defaults: {
 	        today: _constants.today,
-	        choose: nextDays
+	        choose: nextDays,
+	        lang: 'nl'
 	    }
 	});
 
@@ -23735,7 +23745,7 @@
 	var EventsList = _backbone2['default'].Collection.extend({
 	    model: Event,
 	    url: function url() {
-	        return 'https://www.rijksmuseum.nl/api/en/agenda/' + calendar.get('today') + '?key=' + _constants.key + '&format=json';
+	        return 'https://www.rijksmuseum.nl/api/' + calendar.get('lang') + '/agenda/' + calendar.get('today') + '?key=' + _constants.key + '&format=json';
 	    },
 	    initialize: function initialize() {
 	        this.fetch();
@@ -40400,17 +40410,21 @@
 	var __t, __p = '', __j = Array.prototype.join;
 	function print() { __p += __j.call(arguments, '') }
 	with (obj) {
-	__p += '<h2>Today Events</h1>\n<div>Date: ' +
+	__p += '<div class="Header__Cell">\n    <div>Date: ' +
 	((__t = ( today )) == null ? '' : __t) +
-	'</div>\n<br>\n<h3>Change date:</h3>\n<select id="newDate">\n    ';
+	'</div>\n</div>\n\n<div class="Header__Cell">\n    <h3>Change date:</h3>\n    <select id="newDate">\n        ';
 	 for(var i = 0; i < choose.length; i++){;
-	__p += '\n        <option value="' +
+	__p += '\n            <option value="' +
 	((__t = ( choose[i] )) == null ? '' : __t) +
 	'">' +
 	((__t = ( choose[i] )) == null ? '' : __t) +
-	'</option>\n    ';
+	'</option>\n        ';
 	};
-	__p += '\n</select>';
+	__p += '\n    </select>\n</div>\n\n<div class="Header__Cell">\n    <h3>Change language:</h3>\n    <span class="changeLang ' +
+	((__t = ( lang === 'nl' && 'changeLang_active' )) == null ? '' : __t) +
+	'" data-lang="nl">Nl</span> \n        or \n    <span class="changeLang ' +
+	((__t = ( lang === 'en' && 'changeLang_active' )) == null ? '' : __t) +
+	'" data-lang="en">EN</span>\n</div>';
 
 	}
 	return __p
