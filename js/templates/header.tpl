@@ -6,7 +6,7 @@
     <h3>Change date:</h3>
     <select id="newDate">
         <% for(var i = 0; i < choose.length; i++){%>
-            <option value="<%= choose[i] %>"><%= choose[i] %></option>
+            <option value="<%= choose[i] %>" <%= choose[i] === today && 'selected' %> ><%= choose[i] %></option>
         <%}%>
     </select>
 </div>
