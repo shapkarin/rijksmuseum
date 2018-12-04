@@ -40463,7 +40463,7 @@
 	'<br>\n        ';
 	 var startDate = moment(period.startDate) ;
 	__p += '\n        ';
-	 var endDate = moment(period.startDate) ;
+	 var endDate = moment(period.endDate) ;
 	__p += '\n        ';
 	if(startDate.format('YYYY-MM-DD') === endDate.format('YYYY-MM-DD')){;
 	__p += '\n            ' +
