@@ -16,9 +16,7 @@ export const EventView = Marionette.ItemView.extend({
         change: 'render'
     },
     templateHelpers: {
-        getTime: function(date){
-            return moment(date).format('HH:MM')
-        }
+        moment
     }
 });
 

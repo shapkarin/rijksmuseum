@@ -6,6 +6,12 @@
     <%}%>
     <div class="Event_Description">
         <%= exposition.name %><br>
-        <%= getTime(period.startDate) + ' – ' + getTime(period.endDate) %>
+        <% var startDate = moment(period.startDate) %>
+        <% var endDate = moment(period.startDate) %>
+        <%if(startDate.format('YYYY-MM-DD') === endDate.format('YYYY-MM-DD')){%>
+            <%= startDate.format('HH:MM') + ' – ' + endDate.format('HH:MM') %>
+        <%}else{%>
+            <%= startDate.format('YYYY-MM-DD HH:MM') + ' – ' + endDate.format('YYYY-MM-DD HH:MM') %>
+        <%}%>
     </div>
 </a>
