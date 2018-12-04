@@ -4,10 +4,32 @@ body {
 }
 
 #header {
-  margin-bottom: 25px;
-  padding: 30px;
+  padding: 50px;
 }
 
 .Event {
-  margin-bottom: 40px;
+  display: block;
+  height: 250px;
+  overflow: hidden;
+  position: relative;
+  text-decoration: none;
+  color: #000;
+}
+
+.Event > img {
+  transform: translateY(-25%);
+}
+
+.Event_Description {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 10px;
+  background: rgba(0,0,0,.5);
+  color: #fff;
+  width: 100%;
+}
+
+#EventsList {
+  padding: 0 50px;
 }

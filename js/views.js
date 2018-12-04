@@ -19,7 +19,7 @@ export const EventsListView = Backbone.Marionette.CompositeView.extend({
     template: eventsListTpl,
     collection: new EventsList(),
     childView: EventView,
-    childViewContainer: '#events-list',
+    childViewContainer: '#EventsList',
     initialize: function(){
         this.listenTo(calendar, 'change', () => {
             this.collection.fetch();
