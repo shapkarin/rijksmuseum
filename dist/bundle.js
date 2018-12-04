@@ -23635,7 +23635,7 @@
 	    template: _templatesEventsListTpl2['default'],
 	    collection: new _events.EventsList(),
 	    childView: EventView,
-	    childViewContainer: '#events-list',
+	    childViewContainer: '#EventsList',
 	    initialize: function initialize() {
 	        var _this = this;
 
@@ -40425,21 +40425,21 @@
 	var __t, __p = '', __j = Array.prototype.join;
 	function print() { __p += __j.call(arguments, '') }
 	with (obj) {
-	__p += '<div class="Event">\n    <a href="' +
+	__p += '<a href="' +
 	((__t = ( pageRef.url )) == null ? '' : __t) +
-	'">\n        <b>' +
-	((__t = ( exposition.name )) == null ? '' : __t) +
-	'</b><br>\n        <b>' +
-	((__t = ( period.startDate + ' – ' + period.endDate )) == null ? '' : __t) +
-	'</b>\n        ';
+	'" class="Event">\n    ';
 	 if(imageLoading){;
-	__p += '\n            <div>Fetching image...</div>\n        ';
+	__p += '\n        <div>Fetching image...</div>\n    ';
 	}else{;
-	__p += '\n            <img src="' +
+	__p += '\n        <img src="' +
 	((__t = ( image )) == null ? '' : __t) +
-	'" alt="Preview image">\n        ';
+	'" alt="Preview image">\n    ';
 	};
-	__p += '\n    </a>\n</div>\n';
+	__p += '\n    <div class="Event_Description">\n        ' +
+	((__t = ( exposition.name )) == null ? '' : __t) +
+	'<br>\n        ' +
+	((__t = ( period.startDate + ' – ' + period.endDate )) == null ? '' : __t) +
+	'\n    </div>\n</a>\n';
 
 	}
 	return __p
@@ -40453,7 +40453,7 @@
 	obj || (obj = {});
 	var __t, __p = '';
 	with (obj) {
-	__p += '<ul id="events-list"></ul>\n';
+	__p += '<ul id="EventsList"></ul>\n';
 
 	}
 	return __p
