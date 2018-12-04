@@ -40416,7 +40416,9 @@
 	 for(var i = 0; i < choose.length; i++){;
 	__p += '\n            <option value="' +
 	((__t = ( choose[i] )) == null ? '' : __t) +
-	'">' +
+	'" ' +
+	((__t = ( choose[i] === today && 'selected' )) == null ? '' : __t) +
+	' >' +
 	((__t = ( choose[i] )) == null ? '' : __t) +
 	'</option>\n        ';
 	};
