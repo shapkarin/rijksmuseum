@@ -13,5 +13,6 @@
         <%}else{%>
             <%= startDate.format('YYYY-MM-DD HH:MM') + ' – ' + endDate.format('YYYY-MM-DD HH:MM') %>
         <%}%>
+        (<%= moment.duration(endDate - startDate).humanize() %>)
     </div>
 </a>
