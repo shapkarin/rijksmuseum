@@ -11,7 +11,8 @@ const nextDays = Array.apply(null, {length: 30}).map(function(item, index){
 const Calendar = Backbone.Model.extend({
     defaults: {
         today,
-        choose: nextDays
+        choose: nextDays,
+        lang: 'nl'
     },
 });
 
@@ -43,7 +44,7 @@ const Event = Backbone.Model.extend({
 export const EventsList = Backbone.Collection.extend({
     model: Event,
     url: function(){
-        return `https://www.rijksmuseum.nl/api/en/agenda/${calendar.get('today')}?key=${key}&format=json`;
+        return `https://www.rijksmuseum.nl/api/${calendar.get('lang')}/agenda/${calendar.get('today')}?key=${key}&format=json`;
     },
     initialize: function() {
         this.fetch();
