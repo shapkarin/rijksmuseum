@@ -1,5 +1,6 @@
 import Marionette from 'backbone.marionette';
 import Backbone from 'backbone';
+import $ from 'jquery';
 
 import { EventsList, calendar } from './events';
 
@@ -38,12 +39,19 @@ export const Header = Marionette.ItemView.extend({
     },
 
     events: {
-        'change @ui.select': 'search'
+        'change @ui.select': 'search',
+        'click .changeLang': 'changeLang'
     },
 
     search: function(){
         this.model.set(
             'today', this.ui.select.val()
+        )
+    },
+
+    changeLang: function(e){
+        this.model.set(
+            'lang', $(e.target).data('lang')
         )
     }
 });

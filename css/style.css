@@ -3,8 +3,18 @@ body {
   font-size: 29px;
 }
 
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
 #header {
-  padding: 50px;
+  margin: 50px;
+}
+
+#EventsList {
+  padding: 0 50px;
 }
 
 .Event {
@@ -30,6 +40,15 @@ body {
   width: 100%;
 }
 
-#EventsList {
-  padding: 0 50px;
+.changeLang {
+  cursor: pointer;
+}
+
+.changeLang_active {
+  text-decoration: underline;
+}
+
+.Header__Cell {
+  float: left;
+  width: 30%;
 }
