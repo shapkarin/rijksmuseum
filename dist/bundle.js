@@ -40474,7 +40474,9 @@
 	((__t = ( startDate.format('YYYY-MM-DD HH:MM') + ' – ' + endDate.format('YYYY-MM-DD HH:MM') )) == null ? '' : __t) +
 	'\n        ';
 	};
-	__p += '\n    </div>\n</a>\n';
+	__p += '\n        (' +
+	((__t = ( moment.duration(endDate - startDate).humanize() )) == null ? '' : __t) +
+	')\n    </div>\n</a>\n';
 
 	}
 	return __p
