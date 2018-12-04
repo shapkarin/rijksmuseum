@@ -1,1 +1,1 @@
-<ul id="events-list"></ul>
+<ul id="EventsList"></ul>

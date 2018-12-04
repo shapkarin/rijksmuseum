@@ -1,11 +1,11 @@
-<div class="Event">
-    <a href="<%= pageRef.url %>">
-        <b><%= exposition.name %></b><br>
-        <b><%= period.startDate + ' – ' + period.endDate %></b>
-        <% if(imageLoading){%>
-            <div>Fetching image...</div>
-        <%}else{%>
-            <img src="<%= image %>" alt="Preview image">
-        <%}%>
-    </a>
-</div>
+<a href="<%= pageRef.url %>" class="Event">
+    <% if(imageLoading){%>
+        <div>Fetching image...</div>
+    <%}else{%>
+        <img src="<%= image %>" alt="Preview image">
+    <%}%>
+    <div class="Event_Description">
+        <%= exposition.name %><br>
+        <%= period.startDate + ' – ' + period.endDate %>
+    </div>
+</a>
