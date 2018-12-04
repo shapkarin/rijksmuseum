@@ -1,6 +1,7 @@
 import Marionette from 'backbone.marionette';
 import Backbone from 'backbone';
 import $ from 'jquery';
+import moment from 'moment';
 
 import { EventsList, calendar } from './events';
 
@@ -14,6 +15,11 @@ export const EventView = Marionette.ItemView.extend({
     modelEvents: {
         change: 'render'
     },
+    templateHelpers: {
+        getTime: function(date){
+            return moment(date).format('HH:MM')
+        }
+    }
 });
 
 export const EventsListView = Backbone.Marionette.CompositeView.extend({

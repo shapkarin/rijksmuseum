@@ -6,6 +6,6 @@
     <%}%>
     <div class="Event_Description">
         <%= exposition.name %><br>
-        <%= period.startDate + ' – ' + period.endDate %>
+        <%= getTime(period.startDate) + ' – ' + getTime(period.endDate) %>
     </div>
 </a>
