@@ -8,6 +8,9 @@ APP.on('start', function () {
     APP.root = new Root();
 
     const Controller = Marionette.Controller.extend({
+        changeLang: function(lang) {
+            calendar.set({ lang });
+        },
         search: function(lang, date) {
             calendar.set({
                 lang,
@@ -21,7 +24,8 @@ APP.on('start', function () {
     APP.router = new Marionette.AppRouter({
         controller,
         appRoutes: {
-            ":lang/:date": "search",
+            ':lang': 'changeLang',
+            ':lang/:date': 'search'
         }
     });
     
