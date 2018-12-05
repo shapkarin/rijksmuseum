@@ -32,7 +32,7 @@ const Event = Backbone.Model.extend({
 
         $.ajax({
             url: `https://www.rijksmuseum.nl/api/pages/${parsedUrl}?key=${key}&format=json`
-        }).done((result) => {
+        }).done(function(result){
             model.set({
                 image: result.contentPage.headerImage,
                 imageLoading: false
@@ -44,6 +44,7 @@ const Event = Backbone.Model.extend({
 export const EventsList = Backbone.Collection.extend({
     model: Event,
     url: function(){
+        // const { lang, today } = calendar.attributes;
         return `https://www.rijksmuseum.nl/api/${calendar.get('lang')}/agenda/${calendar.get('today')}?key=${key}&format=json`;
     },
     initialize: function() {
