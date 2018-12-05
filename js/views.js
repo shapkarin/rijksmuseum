@@ -16,18 +16,6 @@ export const EventView = Marionette.ItemView.extend({
     modelEvents: {
         change: 'render'
     },
-    initialize: function(){
-        // let lang = calendar.get('lang');
-        // moment.locale(lang);
-        // this.listenTo(calendar, 'change', function(){
-        //     moment.locale(lang)
-        // });
-    },
-
-    onBeforeRender: function(){
-        let lang = calendar.get('lang');
-        moment.locale(lang);
-    },
 
     templateHelpers: {
         moment
@@ -41,7 +29,12 @@ export const EventsListView = Backbone.Marionette.CompositeView.extend({
     childViewContainer: '#EventsList',
     initialize: function(){
         this.listenTo(calendar, 'change', () => this.collection.fetch());
-    }
+    },
+
+    onBeforeRender: function(){
+        let lang = calendar.get('lang');
+        moment.locale(lang);
+    },
 });
 
 export const Header = Marionette.ItemView.extend({
@@ -57,14 +50,6 @@ export const Header = Marionette.ItemView.extend({
         'change @ui.select': 'search',
         'click .changeLang': 'changeLang'
     },
-    // initialize: function(){
-    //     const lang = calendar.get('lang');
-    //     moment.locale(lang);
-    //     this.listenTo(calendar, 'change', function(){
-    //         moment.locale(lang)
-    //     });
-    // },
-
     onBeforeRender: function(){
         let lang = calendar.get('lang');
         moment.locale(lang);
@@ -72,7 +57,7 @@ export const Header = Marionette.ItemView.extend({
     templateHelpers: {
         translate,
         foramtDate: date => {
-            return moment(date).format('Do YYYY, h:mm a, ddd')
+            return moment(date).format('Do MMM, h:mm a, ddd')
         }
     },
     search: function(){

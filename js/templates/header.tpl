@@ -8,8 +8,8 @@
             <select class="custom-select" id="newDate" >
                 <% for(var i = 0; i < choose.length; i++){%>
                     <option value="<%= choose[i] %>" <%= choose[i] === today ? 'selected' : '' %>>
-                        <%= foramtDate(choose[i]) %>
                         <%= choose[i] === '2018-12-29' ? '&#9734;' : '' %>
+                        <%= foramtDate(choose[i]) %>
                     </option>
                 <%}%>
             </select>
