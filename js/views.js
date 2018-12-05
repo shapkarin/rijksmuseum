@@ -3,6 +3,7 @@ import Backbone from 'backbone';
 import $ from 'jquery';
 import moment from 'moment';
 
+import APP from './application';
 import { EventsList, calendar } from './events';
 
 import headerTpl from './templates/header.tpl';
@@ -56,13 +57,13 @@ export const Header = Marionette.ItemView.extend({
         const today = this.ui.select.val();
         const lang = this.model.get('lang');
         this.model.set({ today });
-        Backbone.history.navigate(`/${lang}/${today}`, { trigger:false });
+        APP.router.navigate(`/${lang}/${today}`, { trigger: false });
     },
 
     changeLang: function(e){
         const lang = $(e.target).data('lang');
         const today = this.model.get('today');
         this.model.set({ lang })
-        Backbone.history.navigate(`/${lang}/${today}`, { trigger:false });
+        APP.router.navigate(`/${lang}/${today}`, { trigger: false });
     }
 });

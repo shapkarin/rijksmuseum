@@ -18,7 +18,7 @@ APP.on('start', function () {
     
     const controller = new Controller();
 
-    const router = new Marionette.AppRouter({
+    APP.router = new Marionette.AppRouter({
         controller,
         appRoutes: {
             ":lang/:date": "search",
