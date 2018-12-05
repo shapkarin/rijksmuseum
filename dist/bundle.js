@@ -23652,6 +23652,8 @@
 
 	var _events = __webpack_require__(139);
 
+	var _constants = __webpack_require__(140);
+
 	var _templatesHeaderTpl = __webpack_require__(141);
 
 	var _templatesHeaderTpl2 = _interopRequireDefault(_templatesHeaderTpl);
@@ -23670,11 +23672,16 @@
 	        change: 'render'
 	    },
 	    initialize: function initialize() {
+	        // let lang = calendar.get('lang');
+	        // moment.locale(lang);
+	        // this.listenTo(calendar, 'change', function(){
+	        //     moment.locale(lang)
+	        // });
+	    },
+
+	    onBeforeRender: function onBeforeRender() {
 	        var lang = _events.calendar.get('lang');
 	        _moment2['default'].locale(lang);
-	        this.listenTo(_events.calendar, 'change', function () {
-	            _moment2['default'].locale(lang);
-	        });
 	    },
 
 	    templateHelpers: {
@@ -23707,19 +23714,34 @@
 	    ui: {
 	        select: '#newDate'
 	    },
-
 	    events: {
 	        'change @ui.select': 'search',
 	        'click .changeLang': 'changeLang'
 	    },
+	    // initialize: function(){
+	    //     const lang = calendar.get('lang');
+	    //     moment.locale(lang);
+	    //     this.listenTo(calendar, 'change', function(){
+	    //         moment.locale(lang)
+	    //     });
+	    // },
 
+	    onBeforeRender: function onBeforeRender() {
+	        var lang = _events.calendar.get('lang');
+	        _moment2['default'].locale(lang);
+	    },
+	    templateHelpers: {
+	        translate: _constants.translate,
+	        foramtDate: function foramtDate(date) {
+	            return (0, _moment2['default'])(date).format('Do YYYY, h:mm a, ddd');
+	        }
+	    },
 	    search: function search() {
 	        var today = this.ui.select.val();
 	        var lang = this.model.get('lang');
 	        this.model.set({ today: today });
 	        _application2['default'].router.navigate('/' + lang + '/' + today, { trigger: false });
 	    },
-
 	    changeLang: function changeLang(e) {
 	        var lang = (0, _jquery2['default'])(e.target).data('lang');
 	        var today = this.model.get('today');
@@ -40449,7 +40471,7 @@
 	'use strict';
 
 	Object.defineProperty(exports, '__esModule', {
-	  value: true
+	    value: true
 	});
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -40461,7 +40483,21 @@
 	var today = (0, _moment2['default'])().format('YYYY-MM-DD');
 	exports.today = today;
 	var key = 'lPwqt7oL';
+
 	exports.key = key;
+	var translate = function translate(word, lang) {
+	    var voc = {
+	        "nl": {
+	            "Date": "Datum"
+	        }
+	    };
+	    if (lang !== 'en') {
+	        return voc[lang][word];
+	    } else {
+	        return word;
+	    }
+	};
+	exports.translate = translate;
 
 /***/ }),
 /* 141 */
@@ -40472,14 +40508,16 @@
 	var __t, __p = '', __j = Array.prototype.join;
 	function print() { __p += __j.call(arguments, '') }
 	with (obj) {
-	__p += '<div class="container">\n    <h2>Rijksmuseum Events</h2>\n    <div class="row">\n        <div class="input-group col-7 col-sm-6 col-md-4 col-lg-3">\n            <div class="input-group-prepend">\n                <label class="input-group-text" for="newDate">Date</label>\n            </div>\n            <select class="custom-select" id="newDate" >\n                ';
+	__p += '<div class="container">\n    <h2>Rijksmuseum Events</h2>\n    <div class="row">\n        <div class="input-group col-10 col-sm-8 col-md-6 col-lg-4">\n            <div class="input-group-prepend">\n                <label class="input-group-text" for="newDate">' +
+	((__t = ( translate('Date', lang))) == null ? '' : __t) +
+	'</label>\n            </div>\n            <select class="custom-select" id="newDate" >\n                ';
 	 for(var i = 0; i < choose.length; i++){;
 	__p += '\n                    <option value="' +
 	((__t = ( choose[i] )) == null ? '' : __t) +
 	'" ' +
 	((__t = ( choose[i] === today ? 'selected' : '' )) == null ? '' : __t) +
 	'>\n                        ' +
-	((__t = ( choose[i] )) == null ? '' : __t) +
+	((__t = ( foramtDate(choose[i]) )) == null ? '' : __t) +
 	'\n                        ' +
 	((__t = ( choose[i] === '2018-12-29' ? '&#9734;' : '' )) == null ? '' : __t) +
 	'\n                    </option>\n                ';
