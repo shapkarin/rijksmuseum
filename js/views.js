@@ -32,8 +32,9 @@ export const EventsListView = Backbone.Marionette.CompositeView.extend({
     },
 
     onBeforeRender: function(){
-        let lang = calendar.get('lang');
-        moment.locale(lang);
+        moment.locale(
+            calendar.get('lang')
+        );
     },
 });
 
@@ -51,8 +52,9 @@ export const Header = Marionette.ItemView.extend({
         'click .changeLang': 'changeLang'
     },
     onBeforeRender: function(){
-        let lang = calendar.get('lang');
-        moment.locale(lang);
+        moment.locale(
+            calendar.get('lang')
+        );
     },
     templateHelpers: {
         translate,
