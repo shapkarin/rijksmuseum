@@ -59,7 +59,7 @@ export const Header = Marionette.ItemView.extend({
     templateHelpers: {
         translate,
         foramtDate: date => {
-            return moment(date).format('Do MMM, h:mm a, ddd')
+            return moment(date).format('Do MMMM, dddd')
         }
     },
     search: function(){
