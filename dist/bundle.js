@@ -23635,6 +23635,14 @@
 	    modelEvents: {
 	        change: 'render'
 	    },
+	    initialize: function initialize() {
+	        var lang = _events.calendar.get('lang');
+	        _moment2['default'].locale(lang);
+	        this.listenTo(_events.calendar, 'change', function () {
+	            _moment2['default'].locale(lang);
+	        });
+	    },
+
 	    templateHelpers: {
 	        moment: _moment2['default']
 	    }
@@ -40460,7 +40468,7 @@
 	'<br>\n        ';
 	 var startDate = moment(period.startDate) ;
 	__p += '\n        ';
-	 var endDate = moment(period.endDate) ;
+	 var endDate = moment(period.endDate);;
 	__p += '\n        ';
 	if(startDate.format('YYYY-MM-DD') === endDate.format('YYYY-MM-DD')){;
 	__p += '\n            ' +
