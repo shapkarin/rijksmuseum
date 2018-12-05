@@ -17,8 +17,8 @@ export const EventView = Marionette.ItemView.extend({
     initialize: function(){
         const lang = calendar.get('lang');
         moment.locale(lang);
-        this.listenTo(calendar, 'change', () => {
-            moment.locale(lang);
+        this.listenTo(calendar, 'change', function(){
+            moment.locale(lang)
         });
     },
 
@@ -33,9 +33,7 @@ export const EventsListView = Backbone.Marionette.CompositeView.extend({
     childView: EventView,
     childViewContainer: '#EventsList',
     initialize: function(){
-        this.listenTo(calendar, 'change', () => {
-            this.collection.fetch();
-        });
+        this.listenTo(calendar, 'change', () => this.collection.fetch());
     }
 });
 
