@@ -1,7 +1,7 @@
 <div class="container">
     <h2>Rijksmuseum Events</h2>
     <div class="row">
-        <div class="input-group col-3">
+        <div class="input-group col-7 col-sm-6 col-md-4 col-lg-3">
             <div class="input-group-prepend">
                 <label class="input-group-text" for="newDate">Date</label>
             </div>
