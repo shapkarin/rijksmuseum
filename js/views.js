@@ -14,6 +14,13 @@ export const EventView = Marionette.ItemView.extend({
     modelEvents: {
         change: 'render'
     },
+    initialize: function(){
+        moment.locale(calendar.get('lang'));
+        this.listenTo(calendar, 'change', () => {
+            moment.locale(calendar.get('lang'));
+        });
+    },
+
     templateHelpers: {
         moment
     }
