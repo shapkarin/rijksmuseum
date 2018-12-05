@@ -1,6 +1,6 @@
 <a href="<%= pageRef.url %>" target="_blank" class="Event">
     <% if(imageLoading){%>
-        <div>Fetching image...</div>
+        <div class="loadingImg">Fetching image...</div>
     <%}else{%>
         <img src="<%= image %>" alt="Preview image">
     <%}%>
