@@ -1,14 +1,14 @@
 <div class="container">
     <h2>Rijksmuseum Events</h2>
     <div class="row">
-        <div class="input-group col-7 col-sm-6 col-md-4 col-lg-3">
+        <div class="input-group col-10 col-sm-8 col-md-6 col-lg-4">
             <div class="input-group-prepend">
-                <label class="input-group-text" for="newDate">Date</label>
+                <label class="input-group-text" for="newDate"><%= translate('Date', lang)%></label>
             </div>
             <select class="custom-select" id="newDate" >
                 <% for(var i = 0; i < choose.length; i++){%>
                     <option value="<%= choose[i] %>" <%= choose[i] === today ? 'selected' : '' %>>
-                        <%= choose[i] %>
+                        <%= foramtDate(choose[i]) %>
                         <%= choose[i] === '2018-12-29' ? '&#9734;' : '' %>
                     </option>
                 <%}%>
