@@ -40449,7 +40449,7 @@
 	((__t = ( pageRef.url )) == null ? '' : __t) +
 	'" target="_blank" class="Event">\n    ';
 	 if(imageLoading){;
-	__p += '\n        <div>Fetching image...</div>\n    ';
+	__p += '\n        <div class="loadingImg">Fetching image...</div>\n    ';
 	}else{;
 	__p += '\n        <img src="' +
 	((__t = ( image )) == null ? '' : __t) +
