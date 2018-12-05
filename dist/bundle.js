@@ -40373,6 +40373,10 @@
 
 	var _moment2 = _interopRequireDefault(_moment);
 
+	var _application = __webpack_require__(1);
+
+	var _application2 = _interopRequireDefault(_application);
+
 	var _constants = __webpack_require__(140);
 
 	var nextDays = Array.apply(null, { length: 30 }).map(function (item, index) {
@@ -40423,7 +40427,10 @@
 	        return 'https://www.rijksmuseum.nl/api/' + calendar.get('lang') + '/agenda/' + calendar.get('today') + '?key=' + _constants.key + '&format=json';
 	    },
 	    initialize: function initialize() {
-	        this.fetch();
+	        // TODO: fix
+	        if (_backbone2['default'].history.getHash().length === 0) {
+	            this.fetch();
+	        }
 	    },
 	    parse: function parse(response) {
 	        return response.options;
