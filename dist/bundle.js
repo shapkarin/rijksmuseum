@@ -64,6 +64,9 @@
 	    _application2['default'].root = new _layout.Root();
 
 	    var Controller = _backboneMarionette2['default'].Controller.extend({
+	        changeLang: function changeLang(lang) {
+	            _events.calendar.set({ lang: lang });
+	        },
 	        search: function search(lang, date) {
 	            _events.calendar.set({
 	                lang: lang,
@@ -77,7 +80,8 @@
 	    _application2['default'].router = new _backboneMarionette2['default'].AppRouter({
 	        controller: controller,
 	        appRoutes: {
-	            ":lang/:date": "search"
+	            ':lang': 'changeLang',
+	            ':lang/:date': 'search'
 	        }
 	    });
 
