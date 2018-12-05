@@ -14,7 +14,11 @@ body {
   overflow: hidden;
   position: relative;
   text-decoration: none;
-  color: #000;
+}
+
+.loadingImg {
+  color: #000 !important;
+  text-decoration: none !important;
 }
 
 .Event > img {
