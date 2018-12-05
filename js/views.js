@@ -53,14 +53,16 @@ export const Header = Marionette.ItemView.extend({
     },
 
     search: function(){
-        this.model.set(
-            'today', this.ui.select.val()
-        )
+        const today = this.ui.select.val();
+        const lang = this.model.get('lang');
+        this.model.set({ today });
+        Backbone.history.navigate(`/${lang}/${today}`, { trigger:false });
     },
 
     changeLang: function(e){
-        this.model.set(
-            'lang', $(e.target).data('lang')
-        )
+        const lang = $(e.target).data('lang');
+        const today = this.model.get('today');
+        this.model.set({ lang })
+        Backbone.history.navigate(`/${lang}/${today}`, { trigger:false });
     }
 });
