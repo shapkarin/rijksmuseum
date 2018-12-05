@@ -23692,8 +23692,7 @@
 	    },
 
 	    onBeforeRender: function onBeforeRender() {
-	        var lang = _events.calendar.get('lang');
-	        _moment2['default'].locale(lang);
+	        _moment2['default'].locale(_events.calendar.get('lang'));
 	    }
 	});
 
@@ -23712,13 +23711,12 @@
 	        'click .changeLang': 'changeLang'
 	    },
 	    onBeforeRender: function onBeforeRender() {
-	        var lang = _events.calendar.get('lang');
-	        _moment2['default'].locale(lang);
+	        _moment2['default'].locale(_events.calendar.get('lang'));
 	    },
 	    templateHelpers: {
 	        translate: _constants.translate,
 	        foramtDate: function foramtDate(date) {
-	            return (0, _moment2['default'])(date).format('Do MMM, h:mm a, ddd');
+	            return (0, _moment2['default'])(date).format('Do MMMM, dddd');
 	        }
 	    },
 	    search: function search() {
