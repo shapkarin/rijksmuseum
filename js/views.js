@@ -5,6 +5,7 @@ import moment from 'moment';
 
 import APP from './application';
 import { EventsList, calendar } from './events';
+import { translate } from './constants';
 
 import headerTpl from './templates/header.tpl';
 import eventTpl from './templates/event.tpl';
@@ -16,11 +17,16 @@ export const EventView = Marionette.ItemView.extend({
         change: 'render'
     },
     initialize: function(){
-        const lang = calendar.get('lang');
+        // let lang = calendar.get('lang');
+        // moment.locale(lang);
+        // this.listenTo(calendar, 'change', function(){
+        //     moment.locale(lang)
+        // });
+    },
+
+    onBeforeRender: function(){
+        let lang = calendar.get('lang');
         moment.locale(lang);
-        this.listenTo(calendar, 'change', function(){
-            moment.locale(lang)
-        });
     },
 
     templateHelpers: {
@@ -47,19 +53,34 @@ export const Header = Marionette.ItemView.extend({
     ui: {
         select: '#newDate'
     },
-
     events: {
         'change @ui.select': 'search',
         'click .changeLang': 'changeLang'
     },
+    // initialize: function(){
+    //     const lang = calendar.get('lang');
+    //     moment.locale(lang);
+    //     this.listenTo(calendar, 'change', function(){
+    //         moment.locale(lang)
+    //     });
+    // },
 
+    onBeforeRender: function(){
+        let lang = calendar.get('lang');
+        moment.locale(lang);
+    },
+    templateHelpers: {
+        translate,
+        foramtDate: date => {
+            return moment(date).format('Do YYYY, h:mm a, ddd')
+        }
+    },
     search: function(){
         const today = this.ui.select.val();
         const lang = this.model.get('lang');
         this.model.set({ today });
         APP.router.navigate(`/${lang}/${today}`, { trigger: false });
     },
-
     changeLang: function(e){
         const lang = $(e.target).data('lang');
         const today = this.model.get('today');
