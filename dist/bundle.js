@@ -40430,10 +40430,12 @@
 	__p += '\n                    <option value="' +
 	((__t = ( choose[i] )) == null ? '' : __t) +
 	'" ' +
-	((__t = ( choose[i] === today && 'selected' )) == null ? '' : __t) +
-	' >' +
+	((__t = ( choose[i] === today ? 'selected' : '' )) == null ? '' : __t) +
+	'>\n                        ' +
 	((__t = ( choose[i] )) == null ? '' : __t) +
-	'</option>\n                ';
+	'\n                        ' +
+	((__t = ( choose[i] === '2018-12-29' ? '&#9734;' : '' )) == null ? '' : __t) +
+	'\n                    </option>\n                ';
 	};
 	__p += '\n            </select>\n        </div>\n        <span>\n            <span class="changeLang ' +
 	((__t = ( lang === 'nl' && 'changeLang_active' )) == null ? '' : __t) +

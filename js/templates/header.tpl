@@ -7,7 +7,10 @@
             </div>
             <select class="custom-select" id="newDate" >
                 <% for(var i = 0; i < choose.length; i++){%>
-                    <option value="<%= choose[i] %>" <%= choose[i] === today && 'selected' %> ><%= choose[i] %></option>
+                    <option value="<%= choose[i] %>" <%= choose[i] === today ? 'selected' : '' %>>
+                        <%= choose[i] %>
+                        <%= choose[i] === '2018-12-29' ? '&#9734;' : '' %>
+                    </option>
                 <%}%>
             </select>
         </div>
