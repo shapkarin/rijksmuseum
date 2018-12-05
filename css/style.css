@@ -1,21 +1,11 @@
 body {
-  background-color: antiquewhite;
-  font-size: 25px;
-  font-family: Helvetica;
+  font-family: 'Roboto', Helvetica, sans-serif;
 }
 
 .clearfix:after {
   content: "";
   display: table;
   clear: both;
-}
-
-#header {
-  margin: 50px;
-}
-
-#EventsList {
-  padding: 0 50px;
 }
 
 .Event {
@@ -39,6 +29,7 @@ body {
   background: rgba(0,0,0,.5);
   color: #fff;
   width: 100%;
+  font-size: 21px;
 }
 
 .changeLang {

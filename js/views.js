@@ -10,7 +10,6 @@ import eventTpl from './templates/event.tpl';
 import eventsListTpl from './templates/eventsList.tpl';
 
 export const EventView = Marionette.ItemView.extend({
-    tagName: 'li',
     template: eventTpl,
     modelEvents: {
         change: 'render'
