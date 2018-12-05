@@ -1,1 +1,1 @@
-<ul id="EventsList"></ul>
+<div id="EventsList" class="container"></div>
