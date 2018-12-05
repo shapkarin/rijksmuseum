@@ -23658,7 +23658,7 @@
 	        var _this = this;
 
 	        this.listenTo(_events.calendar, 'change', function () {
-	            _this.collection.fetch();
+	            return _this.collection.fetch();
 	        });
 	    }
 	});
@@ -40383,6 +40383,7 @@
 	var EventsList = _backbone2['default'].Collection.extend({
 	    model: Event,
 	    url: function url() {
+	        // const { lang, today } = calendar.attributes;
 	        return 'https://www.rijksmuseum.nl/api/' + calendar.get('lang') + '/agenda/' + calendar.get('today') + '?key=' + _constants.key + '&format=json';
 	    },
 	    initialize: function initialize() {
@@ -40424,7 +40425,7 @@
 	var __t, __p = '', __j = Array.prototype.join;
 	function print() { __p += __j.call(arguments, '') }
 	with (obj) {
-	__p += '<div class="container">\n    <h2>Rijksmuseum Events</h2>\n    <div class="row">\n        <div class="input-group col-3">\n            <div class="input-group-prepend">\n                <label class="input-group-text" for="newDate">Date</label>\n            </div>\n            <select class="custom-select" id="newDate" >\n                ';
+	__p += '<div class="container">\n    <h2>Rijksmuseum Events</h2>\n    <div class="row">\n        <div class="input-group col-7 col-sm-6 col-md-4 col-lg-3">\n            <div class="input-group-prepend">\n                <label class="input-group-text" for="newDate">Date</label>\n            </div>\n            <select class="custom-select" id="newDate" >\n                ';
 	 for(var i = 0; i < choose.length; i++){;
 	__p += '\n                    <option value="' +
 	((__t = ( choose[i] )) == null ? '' : __t) +
