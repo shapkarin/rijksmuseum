@@ -23671,18 +23671,6 @@
 	    modelEvents: {
 	        change: 'render'
 	    },
-	    initialize: function initialize() {
-	        // let lang = calendar.get('lang');
-	        // moment.locale(lang);
-	        // this.listenTo(calendar, 'change', function(){
-	        //     moment.locale(lang)
-	        // });
-	    },
-
-	    onBeforeRender: function onBeforeRender() {
-	        var lang = _events.calendar.get('lang');
-	        _moment2['default'].locale(lang);
-	    },
 
 	    templateHelpers: {
 	        moment: _moment2['default']
@@ -23701,6 +23689,11 @@
 	        this.listenTo(_events.calendar, 'change', function () {
 	            return _this.collection.fetch();
 	        });
+	    },
+
+	    onBeforeRender: function onBeforeRender() {
+	        var lang = _events.calendar.get('lang');
+	        _moment2['default'].locale(lang);
 	    }
 	});
 
@@ -23718,14 +23711,6 @@
 	        'change @ui.select': 'search',
 	        'click .changeLang': 'changeLang'
 	    },
-	    // initialize: function(){
-	    //     const lang = calendar.get('lang');
-	    //     moment.locale(lang);
-	    //     this.listenTo(calendar, 'change', function(){
-	    //         moment.locale(lang)
-	    //     });
-	    // },
-
 	    onBeforeRender: function onBeforeRender() {
 	        var lang = _events.calendar.get('lang');
 	        _moment2['default'].locale(lang);
@@ -23733,7 +23718,7 @@
 	    templateHelpers: {
 	        translate: _constants.translate,
 	        foramtDate: function foramtDate(date) {
-	            return (0, _moment2['default'])(date).format('Do YYYY, h:mm a, ddd');
+	            return (0, _moment2['default'])(date).format('Do MMM, h:mm a, ddd');
 	        }
 	    },
 	    search: function search() {
@@ -40516,9 +40501,9 @@
 	((__t = ( choose[i] )) == null ? '' : __t) +
 	'" ' +
 	((__t = ( choose[i] === today ? 'selected' : '' )) == null ? '' : __t) +
-	'>\n                    ' +
+	'>\n                        ' +
 	((__t = ( choose[i] === '2018-12-29' ? '&#9734;' : '' )) == null ? '' : __t) +
-	'\n                    ' +
+	'\n                        ' +
 	((__t = ( foramtDate(choose[i]) )) == null ? '' : __t) +
 	'\n                    </option>\n                ';
 	};
