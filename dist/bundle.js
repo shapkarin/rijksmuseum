@@ -23631,7 +23631,6 @@
 	var _templatesEventsListTpl2 = _interopRequireDefault(_templatesEventsListTpl);
 
 	var EventView = _backboneMarionette2['default'].ItemView.extend({
-	    tagName: 'li',
 	    template: _templatesEventTpl2['default'],
 	    modelEvents: {
 	        change: 'render'
@@ -40417,23 +40416,21 @@
 	var __t, __p = '', __j = Array.prototype.join;
 	function print() { __p += __j.call(arguments, '') }
 	with (obj) {
-	__p += '<div class="Header__Cell">\n    <div>Date: ' +
-	((__t = ( today )) == null ? '' : __t) +
-	'</div>\n</div>\n\n<div class="Header__Cell">\n    <h3>Change date:</h3>\n    <select id="newDate">\n        ';
+	__p += '<div class="container">\n    <h2>Rijksmuseum Events</h2>\n    <div class="row">\n        <div class="input-group col-3">\n            <div class="input-group-prepend">\n                <label class="input-group-text" for="newDate">Date</label>\n            </div>\n            <select class="custom-select" id="newDate" >\n                ';
 	 for(var i = 0; i < choose.length; i++){;
-	__p += '\n            <option value="' +
+	__p += '\n                    <option value="' +
 	((__t = ( choose[i] )) == null ? '' : __t) +
 	'" ' +
 	((__t = ( choose[i] === today && 'selected' )) == null ? '' : __t) +
 	' >' +
 	((__t = ( choose[i] )) == null ? '' : __t) +
-	'</option>\n        ';
+	'</option>\n                ';
 	};
-	__p += '\n    </select>\n</div>\n\n<div class="Header__Cell">\n    <h3>Change language:</h3>\n    <span class="changeLang ' +
+	__p += '\n            </select>\n        </div>\n        <span>\n            <span class="changeLang ' +
 	((__t = ( lang === 'nl' && 'changeLang_active' )) == null ? '' : __t) +
-	'" data-lang="nl">Nl</span> \n        or \n    <span class="changeLang ' +
+	'" data-lang="nl">Nl</span> \n            or \n            <span class="changeLang ' +
 	((__t = ( lang === 'en' && 'changeLang_active' )) == null ? '' : __t) +
-	'" data-lang="en">EN</span>\n</div>';
+	'" data-lang="en">En</span>\n        </span>\n        \n    </div>\n</div>';
 
 	}
 	return __p
@@ -40490,7 +40487,7 @@
 	obj || (obj = {});
 	var __t, __p = '';
 	with (obj) {
-	__p += '<ul id="EventsList"></ul>\n';
+	__p += '<div id="EventsList" class="container"></div>\n';
 
 	}
 	return __p
