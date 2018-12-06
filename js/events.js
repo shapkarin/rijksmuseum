@@ -5,7 +5,7 @@ import moment from 'moment';
 import APP from './application';
 import { key, today } from './constants';
 
-const nextDays = Array.apply(null, {length: 30}).map(function(item, index){
+const nextDays = [...Array(30)].map(function(item, index){
     return moment(today).add(index, 'days').format('YYYY-MM-DD')
 });
 
