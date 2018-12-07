@@ -86,7 +86,7 @@
 	        appRoutes: {
 	            ':lang': 'changeLang',
 	            ':lang/:date': 'search',
-	            '*other': 'loadToday'
+	            '': 'loadToday'
 	        }
 	    });
 
