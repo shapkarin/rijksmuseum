@@ -55,9 +55,7 @@ export const Header = Marionette.ItemView.extend({
     },
     templateHelpers: {
         translate,
-        foramtDate: date => {
-            return moment(date).format('Do MMMM, dddd')
-        }
+        foramtDate: date => moment(date).format('Do MMMM, dddd')
     },
     search: function(){
         const today = this.ui.select.val();

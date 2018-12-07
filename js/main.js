@@ -4,7 +4,6 @@ import Marionette from 'backbone.marionette';
 
 import { calendar, eventsList } from './events';
 
-//TODO: add preloading data
 APP.on('start', function () {
     APP.root = new Root();
 
@@ -30,7 +29,6 @@ APP.on('start', function () {
         appRoutes: {
             ':lang': 'changeLang',
             ':lang/:date': 'search',
-            // TODO: use preload
             '': 'loadToday'
         }
     });

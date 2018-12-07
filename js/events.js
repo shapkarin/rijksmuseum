@@ -2,7 +2,6 @@ import Backbone from 'backbone';
 import $ from 'jquery';
 import moment from 'moment';
 
-import APP from './application';
 import { key, today } from './constants';
 
 const nextDays = [...Array(30)].map(function(item, index){
@@ -27,7 +26,6 @@ const Event = Backbone.Model.extend({
         const model = this;
         const { url } = model.get('pageRef');
         const parsedUrl = url.substring(
-            // stupid..
             url.indexOf('.nl/') + 4
         );
 
@@ -56,5 +54,4 @@ const EventsList = Backbone.Collection.extend({
     },
 });
 
-// TODO: use preload
 export const eventsList = new EventsList();
