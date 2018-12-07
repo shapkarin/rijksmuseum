@@ -27,9 +27,6 @@ export const EventsListView = Backbone.Marionette.CompositeView.extend({
     collection: new EventsList(),
     childView: EventView,
     childViewContainer: '#EventsList',
-    initialize: function(){
-        this.listenTo(calendar, 'change', () => this.collection.fetch());
-    },
 
     onBeforeRender: function(){
         moment.locale(

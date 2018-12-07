@@ -45,11 +45,13 @@ const Event = Backbone.Model.extend({
 export const EventsList = Backbone.Collection.extend({
     model: Event,
     url: function(){
-        // const { lang, today } = calendar.attributes;
-        return `https://www.rijksmuseum.nl/api/${calendar.get('lang')}/agenda/${calendar.get('today')}?key=${key}&format=json`;
+        const { lang, today } = calendar.attributes;
+        return `https://www.rijksmuseum.nl/api/${lang}/agenda/${today}?key=${key}&format=json`;
     },
     initialize: function() {
-        // TODO: fix
+        this.listenTo(calendar, 'change', () => this.fetch());
+        // this.listenTo(APP, 'start', () => this.fetch());
+        // TODO: fix... maybe listen for some bus to understand when to fetch while app init
         if (Backbone.history.getHash().length === 0){
             this.fetch();
         }
