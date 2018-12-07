@@ -30,6 +30,7 @@ APP.on('start', function () {
         appRoutes: {
             ':lang': 'changeLang',
             ':lang/:date': 'search',
+            // TODO: use preload
             '': 'loadToday'
         }
     });
