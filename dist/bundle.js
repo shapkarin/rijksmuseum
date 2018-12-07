@@ -60,7 +60,6 @@
 
 	var _events = __webpack_require__(139);
 
-	//TODO: add preloading data
 	_application2['default'].on('start', function () {
 	    _application2['default'].root = new _layout.Root();
 
@@ -40382,10 +40381,6 @@
 
 	var _moment2 = _interopRequireDefault(_moment);
 
-	var _application = __webpack_require__(1);
-
-	var _application2 = _interopRequireDefault(_application);
-
 	var _constants = __webpack_require__(140);
 
 	var nextDays = [].concat(_toConsumableArray(Array(30))).map(function (item, index) {
@@ -40414,9 +40409,7 @@
 
 	        var url = _model$get.url;
 
-	        var parsedUrl = url.substring(
-	        // stupid..
-	        url.indexOf('.nl/') + 4);
+	        var parsedUrl = url.substring(url.indexOf('.nl/') + 4);
 
 	        _jquery2['default'].ajax({
 	            url: 'https://www.rijksmuseum.nl/api/pages/' + parsedUrl + '?key=' + _constants.key + '&format=json'
@@ -40450,7 +40443,6 @@
 	    }
 	});
 
-	// TODO: use preload
 	var eventsList = new EventsList();
 	exports.eventsList = eventsList;
 
