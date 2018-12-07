@@ -4,7 +4,7 @@ import $ from 'jquery';
 import moment from 'moment';
 
 import APP from './application';
-import { EventsList, calendar } from './events';
+import { eventsList, calendar } from './events';
 import { translate } from './constants';
 
 import headerTpl from './templates/header.tpl';
@@ -24,12 +24,9 @@ export const EventView = Marionette.ItemView.extend({
 
 export const EventsListView = Backbone.Marionette.CompositeView.extend({
     template: eventsListTpl,
-    collection: new EventsList(),
+    collection: eventsList,
     childView: EventView,
     childViewContainer: '#EventsList',
-    initialize: function(){
-        this.listenTo(calendar, 'change', () => this.collection.fetch());
-    },
 
     onBeforeRender: function(){
         moment.locale(

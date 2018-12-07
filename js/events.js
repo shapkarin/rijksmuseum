@@ -5,7 +5,7 @@ import moment from 'moment';
 import APP from './application';
 import { key, today } from './constants';
 
-const nextDays = Array.apply(null, {length: 30}).map(function(item, index){
+const nextDays = [...Array(30)].map(function(item, index){
     return moment(today).add(index, 'days').format('YYYY-MM-DD')
 });
 
@@ -42,19 +42,19 @@ const Event = Backbone.Model.extend({
     },
 });
 
-export const EventsList = Backbone.Collection.extend({
+const EventsList = Backbone.Collection.extend({
     model: Event,
     url: function(){
-        // const { lang, today } = calendar.attributes;
-        return `https://www.rijksmuseum.nl/api/${calendar.get('lang')}/agenda/${calendar.get('today')}?key=${key}&format=json`;
+        const { lang, today } = calendar.attributes;
+        return `https://www.rijksmuseum.nl/api/${lang}/agenda/${today}?key=${key}&format=json`;
     },
     initialize: function() {
-        // TODO: fix
-        if (Backbone.history.getHash().length === 0){
-            this.fetch();
-        }
+        this.listenTo(calendar, 'change', () => this.fetch());
     },
     parse: function(response) {
         return response.options;
     },
 });
+
+// TODO: use preload
+export const eventsList = new EventsList();

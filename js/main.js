@@ -2,8 +2,9 @@ import APP from './application';
 import { Root } from './layout';
 import Marionette from 'backbone.marionette';
 
-import { calendar } from './events';
+import { calendar, eventsList } from './events';
 
+//TODO: add preloading data
 APP.on('start', function () {
     APP.root = new Root();
 
@@ -17,15 +18,19 @@ APP.on('start', function () {
                 today: date
             })
         },
+        loadToday: function(){
+            eventsList.fetch()
+        }
     });
     
     const controller = new Controller();
-
+    
     APP.router = new Marionette.AppRouter({
         controller,
         appRoutes: {
             ':lang': 'changeLang',
-            ':lang/:date': 'search'
+            ':lang/:date': 'search',
+            '*other': 'loadToday'
         }
     });
     
