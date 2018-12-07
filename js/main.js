@@ -4,7 +4,6 @@ import Marionette from 'backbone.marionette';
 
 import { calendar, eventsList } from './events';
 
-//TODO: add preloading data
 APP.on('start', function () {
     APP.root = new Root();
 
