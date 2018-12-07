@@ -42,7 +42,7 @@ const Event = Backbone.Model.extend({
     },
 });
 
-export const EventsList = Backbone.Collection.extend({
+const EventsList = Backbone.Collection.extend({
     model: Event,
     url: function(){
         const { lang, today } = calendar.attributes;
@@ -50,13 +50,11 @@ export const EventsList = Backbone.Collection.extend({
     },
     initialize: function() {
         this.listenTo(calendar, 'change', () => this.fetch());
-        // this.listenTo(APP, 'start', () => this.fetch());
-        // TODO: fix... maybe listen for some bus to understand when to fetch while app init
-        if (Backbone.history.getHash().length === 0){
-            this.fetch();
-        }
     },
     parse: function(response) {
         return response.options;
     },
 });
+
+// TODO: use preload
+export const eventsList = new EventsList();
