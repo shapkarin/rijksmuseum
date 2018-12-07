@@ -60,6 +60,7 @@
 
 	var _events = __webpack_require__(139);
 
+	//TODO: add preloading data
 	_application2['default'].on('start', function () {
 	    _application2['default'].root = new _layout.Root();
 
@@ -72,6 +73,9 @@
 	                lang: lang,
 	                today: date
 	            });
+	        },
+	        loadToday: function loadToday() {
+	            _events.eventsList.fetch();
 	        }
 	    });
 
@@ -81,7 +85,8 @@
 	        controller: controller,
 	        appRoutes: {
 	            ':lang': 'changeLang',
-	            ':lang/:date': 'search'
+	            ':lang/:date': 'search',
+	            '*other': 'loadToday'
 	        }
 	    });
 
@@ -23680,16 +23685,9 @@
 	exports.EventView = EventView;
 	var EventsListView = _backbone2['default'].Marionette.CompositeView.extend({
 	    template: _templatesEventsListTpl2['default'],
-	    collection: new _events.EventsList(),
+	    collection: _events.eventsList,
 	    childView: EventView,
 	    childViewContainer: '#EventsList',
-	    initialize: function initialize() {
-	        var _this = this;
-
-	        this.listenTo(_events.calendar, 'change', function () {
-	            return _this.collection.fetch();
-	        });
-	    },
 
 	    onBeforeRender: function onBeforeRender() {
 	        _moment2['default'].locale(_events.calendar.get('lang'));
@@ -40370,6 +40368,8 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) arr2[i] = arr[i]; return arr2; } else { return Array.from(arr); } }
+
 	var _backbone = __webpack_require__(3);
 
 	var _backbone2 = _interopRequireDefault(_backbone);
@@ -40388,7 +40388,7 @@
 
 	var _constants = __webpack_require__(140);
 
-	var nextDays = Array.apply(null, { length: 30 }).map(function (item, index) {
+	var nextDays = [].concat(_toConsumableArray(Array(30))).map(function (item, index) {
 	    return (0, _moment2['default'])(_constants.today).add(index, 'days').format('YYYY-MM-DD');
 	});
 
@@ -40432,20 +40432,27 @@
 	var EventsList = _backbone2['default'].Collection.extend({
 	    model: Event,
 	    url: function url() {
-	        // const { lang, today } = calendar.attributes;
-	        return 'https://www.rijksmuseum.nl/api/' + calendar.get('lang') + '/agenda/' + calendar.get('today') + '?key=' + _constants.key + '&format=json';
+	        var _calendar$attributes = calendar.attributes;
+	        var lang = _calendar$attributes.lang;
+	        var today = _calendar$attributes.today;
+
+	        return 'https://www.rijksmuseum.nl/api/' + lang + '/agenda/' + today + '?key=' + _constants.key + '&format=json';
 	    },
 	    initialize: function initialize() {
-	        // TODO: fix
-	        if (_backbone2['default'].history.getHash().length === 0) {
-	            this.fetch();
-	        }
+	        var _this = this;
+
+	        this.listenTo(calendar, 'change', function () {
+	            return _this.fetch();
+	        });
 	    },
 	    parse: function parse(response) {
 	        return response.options;
 	    }
 	});
-	exports.EventsList = EventsList;
+
+	// TODO: use preload
+	var eventsList = new EventsList();
+	exports.eventsList = eventsList;
 
 /***/ }),
 /* 140 */
